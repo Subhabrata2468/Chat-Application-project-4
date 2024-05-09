@@ -1,9 +1,13 @@
-FROM node:16-alpine
+FROM node:21
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+
 COPY . .
+
+RUN npm install
+
+COPY .env.example .env
+
 EXPOSE 5000
 
 CMD ["npm","start"]
