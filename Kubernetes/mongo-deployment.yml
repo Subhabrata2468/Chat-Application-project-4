@@ -18,3 +18,4 @@ spec:
         image: mango:latest
         ports:
         - containerPort: 27017
+      automountServiceAccountToken: false
