@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: snappy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-container
+  template:
+    metadata:
+      labels:
+        app: backend-container
+    spec:
+      initContainers:
+      - name: wait-for-mongodb-respond
+        image: busybox
+        command: ['sh', '-c', 'while ! nc -z mongodb 27017; do echo "Waiting..."; sleep 5; done']
+      containers:
+      - name: backend
+        image: subhabrata3002/snappy-server-repo:latest
+        ports:
+        - containerPort: 5000
