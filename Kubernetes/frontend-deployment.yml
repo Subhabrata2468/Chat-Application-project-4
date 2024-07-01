@@ -18,3 +18,4 @@ spec:
         image: subhabrata3002/snappy-public-repo:latest
         ports:
         - containerPort: 3000
+      automountServiceAccountToken: false
