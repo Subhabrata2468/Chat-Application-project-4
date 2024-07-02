@@ -1,0 +1,12 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"features": {
+		"ghcr.io/mpriscella/features/helm-chart-testing:1": {
+			"version": "v3.7.1"
+		},
+		"ghcr.io/schlich/devcontainer-features/helmfile:1": {},
+		"ghcr.io/nucleuscloud/devcontainer-features/helmfile:0": {
+			"version": "v0.158.0"
+		}
+	}
+}

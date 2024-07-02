@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-deployment
-  namespace: snappy  # Changed "Snappy" to "snappy"
+  namespace: {{.Values.namespace.name}} 
 spec:
-  replicas: 1
+  replicas: {{.Values.replicaCount}}
   selector:
     matchLabels:
       app: frontend-container
@@ -20,9 +20,9 @@ spec:
         - containerPort: 3000
       resources:
         requests:
-          memory: "128Mi"
-          cpu: "250m"
+          memory: {{ .Values.resources.requests.memory }}
+          cpu: {{ .Values.resources.requests.cpu }}
         limits:
-          memory: "256Mi"
-          cpu: "500m"
+          memory: {{ .Values.resources.limits.memory }}
+          cpu: {{ .Values.resources.limits.cpu }}
       automountServiceAccountToken: false

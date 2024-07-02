@@ -1,0 +1,32 @@
+# Default values for snappy-helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# default replica
+replicaCount: 1
+
+# for Namespace
+namespace:
+  name: snappy
+
+# for hpa
+hpa:
+  minReplica: 1
+  maxReplica: 5
+  utilisation: 20
+
+# for resources
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "128m"
+  limits:
+    memory: "256Mi"
+    cpu: "500m"
+
+# for protocol
+ports:
+  protocol: TCP
+
+# for service
+type: NodePort

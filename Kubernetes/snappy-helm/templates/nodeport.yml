@@ -8,7 +8,7 @@ spec:
     app: node-exporter
   ports:
   - name: node-exporter
-    protocol: TCP
+    protocol: {{ .Values.ports.protocol }}
     port: 9100
     targetPort: 9100
-  type: NodePort
+  type: {{.Values.type}}
