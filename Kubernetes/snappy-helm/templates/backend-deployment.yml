@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-deployment
-  namespace: {{.Values.namespace.name}}
+  namespace: {{ .Values.namespace.name }}
 spec:
-  replicas: {{.Values.replicaCount}}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: backend-container
@@ -17,33 +17,32 @@ spec:
       - name: wait-for-mongodb-respond
         image: busybox
         command: ['sh', '-c', '
-      # Function to check if MongoDB is ready
-      mongo_ready() {
-        (echo > /dev/tcp/mongodb-service/27017) &> /dev/null
-        return $?
-      }
+          # Function to check if MongoDB is ready
+          mongo_ready() {
+            (echo > /dev/tcp/mongodb-service/27017) &> /dev/null
+            return $?
+          }
 
-      # Wait for MongoDB to be ready
-      until mongo_ready; do
-        echo "Waiting for MongoDB to be ready..."
-        echo "Trying to connect to MongoDB at mongodb:27017"
-        sleep 5
-      done
+          # Wait for MongoDB to be ready
+          until mongo_ready; do
+            echo "Waiting for MongoDB to be ready..."
+            echo "Trying to connect to MongoDB at mongodb-service:27017"
+            sleep 5
+          done
 
-      echo "MongoDB is ready! Proceeding with application startup..."
-      # Add your application startup commands here
-    ']
+          echo "MongoDB is ready! Proceeding with application startup..."
+          # Add your application startup commands here
+        ']
       containers:
       - name: backend
         image: subhabrata3002/snappy-server-repo:latest
         ports:
         - containerPort: 5000
-      resources:
-        requests:
-          memory: {{ .Values.resources.requests.memory }}
-          cpu: {{ .Values.resources.requests.cpu }}
-        limits:
-          memory: {{ .Values.resources.limits.memory }}
-          cpu: {{ .Values.resources.limits.cpu }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
       automountServiceAccountToken: false
-      
