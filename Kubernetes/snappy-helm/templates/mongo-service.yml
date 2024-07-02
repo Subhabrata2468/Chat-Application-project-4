@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mangodb-service
+  name: mongodb-service
   namespace: {{.Values.namespace.name}}
 spec:
   selector:
-    app: mangodb-container
+    app: mongodb-container
   ports:
   - protocol: {{ .Values.ports.protocol }}
     port: 27017
