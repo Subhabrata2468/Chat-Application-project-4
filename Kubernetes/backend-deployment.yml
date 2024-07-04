@@ -22,7 +22,7 @@ spec:
           - |
             # Function to check if MongoDB is ready
             mongo_ready() {
-              (echo > /dev/tcp/mongodb-service/27017) &> /dev/null
+              (echo > /dev/tcp/mongodb-deployment/27017) &> /dev/null
               return $?
             }
 
