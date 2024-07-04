@@ -14,41 +14,49 @@ spec:
         app: backend-container
     spec:
       initContainers:
-      - name: wait-for-mongodb-respond
-        image: busybox
-        command:
-          - 'sh'
-          - '-c'
-          - |
-            # Function to check if MongoDB is ready
-            mongo_ready() {
-              (echo > /dev/tcp/mongodb-service/27017) &> /dev/null
-              return $?
-            }
+        - name: wait-for-mongodb-respond
+          image: busybox
+          command:
+            - 'sh'
+            - '-c'
+            - |
+              # Function to check if MongoDB is ready
+              mongo_ready() {
+                (echo > /dev/tcp/mongodb-service/27017) &> /dev/null
+                return $?
+              }
 
-            # Wait for MongoDB to be ready
-            until mongo_ready; do
-              echo "Waiting for MongoDB to be ready..."
-              echo "Trying to connect to MongoDB at mongodb-service:27017"
-              sleep 5
-            done
+              # Wait for MongoDB to be ready
+              until mongo_ready; do
+                echo "Waiting for MongoDB to be ready..."
+                echo "Trying to connect to MongoDB at mongodb-service:27017"
+                sleep 5
+              done
 
-            echo "MongoDB is ready! Proceeding with application startup..."
+              echo "MongoDB is ready! Proceeding with application startup..."
+          # End of initContainers section
+
       containers:
-      - name: backend
-        image: subhabrata3002/snappy-server-repo:latest
-        ports:
-        - containerPort: 5000
-        env:
-        - name: PORT
-          value: "5000"
-        - name: MONGO_URL
-          value: "mongodb://mongo-service:27017/chat"
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
+        - name: backend
+          image: subhabrata3002/snappy-server-repo:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              value: "5000"
+            - name: MONGO_URL
+              value: "mongodb://mongo-service:27017/chat"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          # End of containers section
+
       automountServiceAccountToken: false
+      # End of spec.template.spec
+    # End of spec.template
+  # End of spec
+# End of metadata
