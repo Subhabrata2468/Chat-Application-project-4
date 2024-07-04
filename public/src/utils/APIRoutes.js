@@ -1,4 +1,4 @@
-export const host = "http://18.209.228.117:5000";
+export const host = "http://backend-service:5000";
 export const loginRoute = `${host}/api/auth/login`;
 export const registerRoute = `${host}/api/auth/register`;
 export const logoutRoute = `${host}/api/auth/logout`;
