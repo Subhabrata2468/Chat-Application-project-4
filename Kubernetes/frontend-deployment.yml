@@ -18,6 +18,9 @@ spec:
         image: subhabrata3002/snappy-public-repo:latest
         ports:
         - containerPort: 3000
+        env:
+        - name: REACT_APP_LOCALHOST_KEY
+          value: "http://backend-deployment:5000"
       resources:
         requests:
           memory: "128Mi"
