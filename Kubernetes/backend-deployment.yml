@@ -16,18 +16,32 @@ spec:
       initContainers:
       - name: wait-for-mongodb-respond
         image: busybox
-        command: ['sh', '-c', ' # Function to check if MongoDB is ready mongo_ready() { (echo > /dev/tcp/mongodb-service/27017) &> /dev/null return $? } #magic___^_^___line # Wait for MongoDB to be ready until mongo_ready; do echo "Waiting for MongoDB to be ready..." echo "Trying to connect to MongoDB at mongodb-service:27017" sleep 5 done #magic___^_^___line echo "MongoDB is ready! Proceeding with application startup..." # Add your application startup commands here ']
+        command: ['sh', '-c', '
+          # Function to check if MongoDB is ready
+          mongo_ready() {
+            (echo > /dev/tcp/mongodb-service/27017) &> /dev/null
+            return $?
+          }
+
+          # Wait for MongoDB to be ready
+          until mongo_ready; do
+            echo "Waiting for MongoDB to be ready..."
+            echo "Trying to connect to MongoDB at mongodb-service:27017"
+            sleep 5
+          done
+
+          echo "MongoDB is ready! Proceeding with application startup..."
+        ']
       containers:
       - name: backend
         image: subhabrata3002/snappy-server-repo:latest
         ports:
         - containerPort: 5000
-      resources:
-        requests:
-          memory: "128Mi"
-          cpu: "250m"
-        limits:
-          memory: "256Mi"
-          cpu: "500m"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
       automountServiceAccountToken: false
-
