@@ -20,7 +20,7 @@ spec:
         - containerPort: 3000
         env:
         - name: REACT_APP_LOCALHOST_KEY
-          value: "http://backend-deployment:5000"
+          value: "http://backend-service:5000"
         resources:   # Moved resources field inside the container definition
           requests:
             memory: "128Mi"
