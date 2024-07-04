@@ -1,6 +1,21 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
+exports.register = (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    return res.status(400).json({ message: 'Username and password are required' });
+  }
+
+  // Implement your user registration logic here
+  console.log(`Registering user: ${username}`);
+  
+  res.status(201).json({ message: 'User registered successfully' });
+};
+
+// Define other controller methods (login, getAllUsers, setAvatar, logOut) similarly
+
+
 module.exports.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
