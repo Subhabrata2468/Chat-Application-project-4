@@ -34,7 +34,7 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "http://frontend-service.snappy:3000",
+    origin: "http://frontend-service.snappy.svc.cluster.local:3000",
     credentials: true,
   },
 });
