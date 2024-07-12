@@ -34,7 +34,7 @@ spec:
             - name: PORT
               value: "5000"
             - name: MONGO_URL
-              value: "mongodb://mongodb-service.snappy.svc.cluster.local:27017/chat"
+              value: "mongodb://snappy.com/chat"
           resources:
             requests:
               memory: "128Mi"
