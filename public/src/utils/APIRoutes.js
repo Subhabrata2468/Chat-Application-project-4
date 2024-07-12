@@ -1,4 +1,4 @@
-export const host = "http://snappy.com";
+export const host = "http://3.223.3.141";
 export const loginRoute = `${host}/api/auth/login`;
 export const registerRoute = `${host}/api/auth/register`;
 export const logoutRoute = `${host}/api/auth/logout`;
