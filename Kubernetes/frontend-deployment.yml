@@ -20,7 +20,7 @@ spec:
         - containerPort: 3000
         env:
         - name: REACT_APP_LOCALHOST_KEY
-          value: "http://backend-service.snappy.svc.cluster.local:5000"
+          value: "http://snappy.com/api"
         resources:   # Moved resources field inside the container definition
           requests:
             memory: "1024Mi"
