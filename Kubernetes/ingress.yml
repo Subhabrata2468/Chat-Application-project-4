@@ -4,13 +4,20 @@ metadata:
   name: snappy-ingress
   namespace: snappy
   annotations:
+    kubernetes.io/ingress.class: nginx  # Specify the IngressClass name
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/websocket-services: backend-service
 spec:
+  defaultBackend:
+    service:
+      name: default-http-backend
+      port:
+        number: 80
   rules:
-    - host: snappy.com
+    - host: ec2-3-223-3-141.compute-1.amazonaws.com
       http:
         paths:
           - path: /
@@ -28,7 +35,7 @@ spec:
                 port:
                   number: 5000
           - path: /socket.io
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: backend-service
@@ -38,6 +45,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: mongo-service
+                name: mongodb-service
                 port:
                   number: 27017
