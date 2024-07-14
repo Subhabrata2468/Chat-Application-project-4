@@ -34,7 +34,7 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "http://ec2-44-201-69-222.compute-1.amazonaws.com",
+    origin: "http://frontend-service:3000",
     credentials: true,
   },
 });
