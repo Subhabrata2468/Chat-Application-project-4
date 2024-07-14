@@ -2,13 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
-  namespace: snappy  # Added namespace
+  namespace: snappy
 spec:
   selector:
     app: frontend-container
   ports:
-  - protocol: TCP
-    port: 3000
-    targetPort: 3000
-    nodePort: 30970
-  type: NodePort
+    - protocol: TCP
+      port: 80        # External port to be exposed by the LoadBalancer
+      targetPort: 3000  # Internal port your application is running on
+  type: LoadBalancer
