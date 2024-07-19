@@ -10,19 +10,4 @@ export default function App() {
   const handleClick = () => {
     sendMessage('Hello, WebSocket!');
   };
-
-  return (
-    <div>
-      <h1>WebSocket Example</h1>
-      <button onClick={handleClick}>Send Message</button>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/setAvatar" element={<SetAvatar />} />
-          <Route path="/" element={<Chat />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
 }
