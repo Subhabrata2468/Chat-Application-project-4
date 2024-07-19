@@ -1,5 +1,3 @@
-// src/services/WebSocketClient.js
-
 class WebSocketClient {
     constructor(url) {
         this.url = url;
@@ -35,4 +33,11 @@ class WebSocketClient {
     }
 }
 
-export default WebSocketClient;
+// Initialize WebSocketClient with the URL from environment variables
+const webSocketUrl = process.env.REACT_APP_LOCALHOST_KEY;
+const webSocketClient = new WebSocketClient(webSocketUrl);
+
+// Connect to the WebSocket server
+webSocketClient.connect();
+
+export default webSocketClient;
