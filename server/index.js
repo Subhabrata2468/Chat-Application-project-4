@@ -34,7 +34,7 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "http://54.173.41.171:30970",
+    origin: "http://44.203.31.86:30970",
     credentials: true,
   },
 });
