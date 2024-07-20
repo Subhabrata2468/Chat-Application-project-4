@@ -1,4 +1,4 @@
-export const host = "http://54.173.41.171:30980";
+export const host = "http://44.203.31.86:30980";
 export const loginRoute = `${host}/api/auth/login`;
 export const registerRoute = `${host}/api/auth/register`;
 export const logoutRoute = `${host}/api/auth/logout`;
