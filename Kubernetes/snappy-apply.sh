@@ -1,5 +1,10 @@
 #!/bin/bash
 
+kubectl create namespace snappy
+
+kubectl delete pods,services,deployments,horizontalpodautoscaler --all -n prometheus-node-exporter
+kubectl delete pods,services,deployments,horizontalpodautoscaler --all -n snappy 
+
 # Apply MongoDB deployment and service
 kubectl apply -f mongo-deployment.yml
 kubectl apply -f mongo-service.yml
